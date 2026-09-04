@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOLI — 취향으로 발견하는 공연 아카이브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FBF9FF; color: #1E1233; font-family: Pretendard, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #7C3AED; text-decoration: none; }
+  a:hover { color: #5B21B6; }
+  ::selection { background: #DDD0FF; }
+  @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+  @keyframes twinkle { 0%,100% { opacity: .25; transform: scale(.7) rotate(45deg) } 50% { opacity: 1; transform: scale(1) rotate(45deg) } }
+  @keyframes marquee-l { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  @keyframes marquee-r { from { transform: translateX(-50%) } to { transform: translateX(0) } }
+  @keyframes pulse-ring { 0% { transform: scale(.9); opacity: .55 } 70% { transform: scale(1.5); opacity: 0 } 100% { opacity: 0 } }
+  @keyframes glow-spin { to { transform: rotate(360deg) } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</helmet>
+
+<div style="width:100%; overflow-x:clip">
+
+  <div style="position:fixed; top:0; left:0; right:0; z-index:50; backdrop-filter:blur(14px); background:rgba(251,249,255,.82); border-bottom:1px solid #EDE5FF">
+    <div style="height:3px; background:#EDE5FF">
+      <div style="{{ pageBar }}"></div>
+    </div>
+    <div style="max-width:1180px; margin:0 auto; padding:0 28px; height:66px; display:flex; align-items:center; justify-content:space-between">
+      <a href="#intro" style="font-family:Pretendard,sans-serif; font-weight:800; font-size:26px; letter-spacing:.5px; color:#7C3AED; display:flex; align-items:center; gap:6px">NOLI</a>
+      <div style="display:flex; align-items:center; gap:34px">
+        <a href="#intro" style="font-size:15px; font-weight:600; color:#4A3A63" style-hover="{{ navHover }}">소개</a>
+        <a href="#taste" style="font-size:15px; font-weight:600; color:#4A3A63" style-hover="{{ navHover }}">취향분석</a>
+        <a href="#features" style="font-size:15px; font-weight:600; color:#4A3A63" style-hover="{{ navHover }}">기능</a>
+        <a href="#archive" style="font-size:15px; font-weight:600; color:#4A3A63" style-hover="{{ navHover }}">아카이브</a>
+        <a href="#archive" style="font-size:14px; font-weight:700; color:#fff; background:#7C3AED; padding:11px 20px; border-radius:999px; box-shadow:0 8px 20px rgba(124,58,237,.28)" style-hover="{{ ctaHover }}">앱 다운로드</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="intro" style="position:relative; padding:150px 28px 90px; background:radial-gradient(120% 90% at 15% 0%, #F0E7FF 0%, #FBF9FF 55%, #FFF1F4 100%)">
+    <sc-if value="{{ showSparkles }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute; inset:0; pointer-events:none; overflow:hidden">
+        <div style="position:absolute; left:8%; top:22%; width:10px; height:10px; background:#C4B5FD; border-radius:2px; animation:twinkle 3.4s ease-in-out infinite"></div>
+        <div style="position:absolute; left:46%; top:12%; width:7px; height:7px; background:#FCA5A5; border-radius:2px; animation:twinkle 2.6s ease-in-out .5s infinite"></div>
+        <div style="position:absolute; right:12%; top:34%; width:12px; height:12px; background:#A78BFA; border-radius:3px; animation:twinkle 4s ease-in-out .9s infinite"></div>
+        <div style="position:absolute; left:22%; bottom:14%; width:8px; height:8px; background:#DDD6FE; border-radius:2px; animation:twinkle 3s ease-in-out 1.3s infinite"></div>
+        <div style="position:absolute; left:-90px; top:120px; width:340px; height:340px; border-radius:50%; background:#E9DDFF; filter:blur(70px); opacity:.7"></div>
+        <div style="position:absolute; right:-60px; bottom:-40px; width:300px; height:300px; border-radius:50%; background:#FFE0E6; filter:blur(70px); opacity:.8"></div>
+      </div>
+    </sc-if>
+    <div style="position:relative; z-index:1; max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; gap:48px; align-items:center; justify-content:center">
+      <div style="flex:1 1 430px; min-width:0">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid #E7DBFF; padding:8px 16px; border-radius:999px; font-size:13px; font-weight:700; color:#7C3AED; box-shadow:0 6px 18px rgba(124,58,237,.10)">
+          <span style="width:7px; height:7px; background:#7C3AED; border-radius:2px; transform:rotate(45deg); display:inline-block"></span>
+          일상에 문화를 더하다, NOLI
+        </div>
+        <h1 style="margin:22px 0 0; font-size:clamp(36px,4.4vw,60px); line-height:1.16; letter-spacing:-1.6px; font-weight:800; text-wrap:pretty">
+          취향으로 발견하고,<br>
+          <span style="color:#7C3AED">기억으로 모으는</span><br>
+          <span style="background:linear-gradient(transparent 66%, #FFD7E0 66%)">공연 아카이브</span>
+        </h1>
+        <p style="margin:24px 0 0; font-size:19px; line-height:1.72; color:#63527D; max-width:490px; text-wrap:pretty">
+          좋아하는 장르와 분위기, 아티스트를 알려주면 NOLI가 매일 맞는 공연을 찾아옵니다.
+          보고 싶은 무대는 보관함에 담고, 본 무대는 나만의 기록으로 남습니다.
+        </p>
+        <div style="display:flex; gap:12px; margin-top:34px; flex-wrap:wrap">
+          <a href="#taste" style="font-size:16px; font-weight:700; color:#fff; background:linear-gradient(135deg,#8B5CF6,#6D28D9); padding:17px 30px; border-radius:999px; box-shadow:0 14px 30px rgba(109,40,217,.30)" style-hover="{{ ctaHover }}">내 취향 분석 보기</a>
+          <a href="#features" style="font-size:16px; font-weight:700; color:#5B21B6; background:#fff; border:1.5px solid #E3D5FF; padding:17px 30px; border-radius:999px" style-hover="{{ ghostHover }}">기능 살펴보기</a>
+        </div>
+        <div style="display:flex; gap:26px; margin-top:44px; flex-wrap:wrap">
+          <div><div style="font-size:26px; font-weight:800; color:#7C3AED">6개 장르</div><div style="font-size:14px; color:#7C6A90; margin-top:4px">콘서트부터 전시까지</div></div>
+          <div style="width:1px; background:#EBE0FF"></div>
+          <div><div style="font-size:26px; font-weight:800; color:#7C3AED">취향 일치율</div><div style="font-size:14px; color:#7C6A90; margin-top:4px">추천마다 표시</div></div>
+          <div style="width:1px; background:#EBE0FF"></div>
+          <div><div style="font-size:26px; font-weight:800; color:#7C3AED">티켓 오픈 알림</div><div style="font-size:14px; color:#7C6A90; margin-top:4px">최대 24시간 전</div></div>
+        </div>
+      </div>
+      <div style="flex:0 1 auto; display:flex; justify-content:center; align-items:flex-end; gap:22px">
+        <div style="animation:floaty 6s ease-in-out infinite; width:216px; height:452px; border-radius:38px; border:7px solid #221632; background:#221632; box-shadow:0 30px 60px rgba(60,25,110,.24); overflow:hidden; flex:none; transform:translateY(26px) rotate(-5deg)">
+          <img src="uploads/1.스플래시.png" alt="NOLI 스플래시 화면" style="width:100%; display:block">
+        </div>
+        <div style="animation:floaty 6s ease-in-out .8s infinite; width:270px; height:562px; border-radius:44px; border:8px solid #221632; background:#221632; box-shadow:0 40px 80px rgba(60,25,110,.30); overflow:hidden; flex:none; transform:rotate(3deg)">
+          <img src="uploads/7.메인.png" alt="NOLI 메인 화면" style="width:100%; display:block">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:110px 28px; background:#FBF9FF">
+    <div style="max-width:1180px; margin:0 auto">
+      <div style="font-size:13px; font-weight:800; letter-spacing:2px; color:#A78BFA">WHY NOLI</div>
+      <h2 style="margin:14px 0 0; font-size:clamp(28px,3.2vw,42px); line-height:1.28; letter-spacing:-1.1px; font-weight:800; max-width:660px; text-wrap:pretty">공연은 넘치는데,<br>내 취향에 맞는 공연은 찾기 어려웠습니다</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:52px">
+        <div style="background:#fff; border:1px solid #F0E8FF; border-radius:28px; padding:34px 30px; box-shadow:0 12px 30px rgba(103,60,180,.07)">
+          <div style="width:52px; height:52px; border-radius:18px; background:#F1EBFF; display:flex; align-items:center; justify-content:center; font-family:Pretendard,sans-serif; font-weight:800; font-size:22px; color:#7C3AED">01</div>
+          <h3 style="margin:22px 0 10px; font-size:21px; font-weight:800; letter-spacing:-.4px">인기순 말고 취향순</h3>
+          <p style="margin:0; font-size:16px; line-height:1.75; color:#6B5B85">예매 사이트는 잘 팔리는 순서로만 보여줍니다. 좋아하는 장르와 분위기에 맞는 무대는 매번 직접 뒤져야 했습니다.</p>
+        </div>
+        <div style="background:#fff; border:1px solid #FFE2E7; border-radius:28px; padding:34px 30px; box-shadow:0 12px 30px rgba(180,60,90,.06)">
+          <div style="width:52px; height:52px; border-radius:18px; background:#FFECEF; display:flex; align-items:center; justify-content:center; font-family:Pretendard,sans-serif; font-weight:800; font-size:22px; color:#F4708A">02</div>
+          <h3 style="margin:22px 0 10px; font-size:21px; font-weight:800; letter-spacing:-.4px">놓친 티켓은 돌아오지 않아요</h3>
+          <p style="margin:0; font-size:16px; line-height:1.75; color:#6B5B85">티켓 오픈은 조용히 지나갑니다. 관심 공연의 오픈 시간을 미리 알려줄 장치가 필요했습니다.</p>
+        </div>
+        <div style="background:#fff; border:1px solid #F0E8FF; border-radius:28px; padding:34px 30px; box-shadow:0 12px 30px rgba(103,60,180,.07)">
+          <div style="width:52px; height:52px; border-radius:18px; background:#F1EBFF; display:flex; align-items:center; justify-content:center; font-family:Pretendard,sans-serif; font-weight:800; font-size:22px; color:#7C3AED">03</div>
+          <h3 style="margin:22px 0 10px; font-size:21px; font-weight:800; letter-spacing:-.4px">본 공연은 어디에도 남지 않아요</h3>
+          <p style="margin:0; font-size:16px; line-height:1.75; color:#6B5B85">티켓은 버려지고 기억만 남습니다. 관람 기록이 쌓여 다시 취향이 되는 공간을 만들었습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 0 96px; background:#FBF9FF; overflow:hidden">
+    <div style="max-width:1180px; margin:0 auto 40px; padding:0 28px; display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap">
+      <div>
+        <div style="font-size:13px; font-weight:800; letter-spacing:2px; color:#A78BFA">CONCEPT COLOR</div>
+        <h2 style="margin:12px 0 0; font-size:clamp(24px,2.6vw,32px); line-height:1.3; letter-spacing:-.8px; font-weight:800">무대 조명의 보라, 티켓의 코랄</h2>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap">
+        <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid #EFE6FF; border-radius:20px; padding:12px 18px 12px 12px">
+          <div style="width:40px; height:40px; border-radius:13px; background:linear-gradient(135deg,#8B5CF6,#6D28D9)"></div>
+          <div><div style="font-size:15px; font-weight:800">NOLI Purple</div><div style="font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#8B7BA5">#7C3AED</div></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid #FFE2E7; border-radius:20px; padding:12px 18px 12px 12px">
+          <div style="width:40px; height:40px; border-radius:13px; background:linear-gradient(135deg,#FFA3B5,#F4708A)"></div>
+          <div><div style="font-size:15px; font-weight:800">Ticket Coral</div><div style="font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#8B7BA5">#F4708A</div></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid #EFE6FF; border-radius:20px; padding:12px 18px 12px 12px">
+          <div style="width:40px; height:40px; border-radius:13px; background:#F1EBFF; border:1px solid #E3D5FF"></div>
+          <div><div style="font-size:15px; font-weight:800">Soft Lavender</div><div style="font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#8B7BA5">#F1EBFF</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:14px; transform:rotate(-1.5deg)">
+      <div style="display:flex; width:max-content; gap:14px; animation:marquee-l 26s linear infinite">
+        <sc-for list="{{ tickerA }}" as="t" hint-placeholder-count="12">
+          <div style="{{ t.style }}">{{ t.label }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex; width:max-content; gap:14px; animation:marquee-r 30s linear infinite">
+        <sc-for list="{{ tickerB }}" as="t" hint-placeholder-count="12">
+          <div style="{{ t.style }}">{{ t.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="taste" style="background:linear-gradient(180deg,#F6F1FF 0%,#F3EDFF 100%)">
+    <div id="scrub" style="position:relative; height:300vh">
+      <div style="position:sticky; top:0; min-height:100vh; display:flex; align-items:center; padding:clamp(70px,9vh,92px) 0 clamp(12px,2.4vh,32px)">
+        <div style="max-width:1180px; margin:0 auto; padding:0 28px; width:100%; display:flex; flex-wrap:wrap; gap:clamp(28px,4vw,48px); align-items:center; justify-content:center">
+          <div style="flex:1 1 420px; min-width:0">
+            <div style="font-size:13px; font-weight:800; letter-spacing:2px; color:#A78BFA">TASTE ANALYSIS</div>
+            <h2 style="margin:12px 0 clamp(18px,3.4vh,40px); font-size:clamp(26px,3vw,40px); line-height:1.26; letter-spacing:-1.1px; font-weight:800; text-wrap:pretty">1분이면 끝나는 취향 설정,<br>그다음은 NOLI가 합니다</h2>
+            <div style="display:flex; flex-direction:column; gap:clamp(8px,1.4vh,14px)">
+              <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+                <div style="{{ s.cardStyle }}">
+                  <div style="{{ s.numStyle }}">{{ s.num }}</div>
+                  <div>
+                    <h3 style="margin:0 0 6px; font-size:19px; font-weight:800; letter-spacing:-.4px">{{ s.title }}</h3>
+                    <p style="margin:0; font-size:15px; line-height:1.6; color:#6B5B85; max-width:520px">{{ s.body }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="height:4px; background:#E6DBFF; border-radius:999px; margin-top:clamp(16px,3vh,34px); max-width:520px; overflow:hidden">
+              <div style="{{ scrubBar }}"></div>
+            </div>
+          </div>
+          <div style="position:relative; flex:0 0 auto; width:min(300px,68vh); height:min(624px,66vh)">
+            <div style="position:absolute; inset:-28px -34px; background:radial-gradient(closest-side,#E4D6FF,transparent); filter:blur(10px)"></div>
+            <div style="position:absolute; inset:0; border-radius:46px; border:8px solid #221632; background:#221632; box-shadow:0 34px 70px rgba(60,25,110,.28); overflow:hidden">
+              <sc-for list="{{ screens }}" as="sc" hint-placeholder-count="3">
+                <img src="{{ sc.src }}" alt="{{ sc.alt }}" style="{{ sc.style }}">
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="padding:110px 28px 120px; background:#FBF9FF">
+    <div style="max-width:1180px; margin:0 auto">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex-wrap:wrap">
+        <div>
+          <div style="font-size:13px; font-weight:800; letter-spacing:2px; color:#A78BFA">FEATURES</div>
+          <h2 style="margin:14px 0 0; font-size:clamp(28px,3.2vw,42px); line-height:1.26; letter-spacing:-1.1px; font-weight:800; text-wrap:pretty">발견부터 기록까지,<br>네 개의 화면으로</h2>
+        </div>
+        <p style="margin:0; font-size:16px; line-height:1.7; color:#6B5B85; max-width:340px">추천을 보고, 오픈일을 챙기고, 보관하고, 돌아봅니다. 하단 탭 하나로 이어지는 흐름입니다.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin-top:60px">
+        <div style="background:linear-gradient(180deg,#F4EEFF,#FFFFFF); border:1px solid #EFE6FF; border-radius:32px; padding:30px 22px 0; text-align:center; overflow:hidden; box-shadow:0 16px 36px rgba(103,60,180,.08); transform:rotate(-1.6deg); transition:transform .4s ease, box-shadow .4s ease" style-hover="{{ tiltHover }}">
+          <div style="display:inline-block; font-size:12px; font-weight:800; color:#7C3AED; background:#fff; border:1px solid #E7DBFF; padding:6px 14px; border-radius:999px">메인</div>
+          <h3 style="margin:16px 0 8px; font-size:20px; font-weight:800; letter-spacing:-.4px">취향 일치율로 추천</h3>
+          <p style="margin:0 0 22px; font-size:15px; line-height:1.7; color:#6B5B85">추천마다 “내 취향 일치 95%”. 왜 이 공연인지 이유까지 함께 보여줍니다.</p>
+          <div style="border-radius:26px 26px 0 0; border:7px solid #221632; border-bottom:0; background:#221632; overflow:hidden; height:290px"><img src="uploads/8.메인_상단content 클릭_상세화면.png" alt="공연 상세 화면" style="width:100%; display:block"></div>
+        </div>
+        <div style="background:linear-gradient(180deg,#FFF0F3,#FFFFFF); border:1px solid #FFE2E7; border-radius:32px; padding:30px 22px 0; text-align:center; overflow:hidden; box-shadow:0 16px 36px rgba(180,60,90,.07); transform:rotate(1.2deg); transition:transform .4s ease, box-shadow .4s ease" style-hover="{{ tiltHover }}">
+          <div style="display:inline-block; font-size:12px; font-weight:800; color:#F4708A; background:#fff; border:1px solid #FFDCE2; padding:6px 14px; border-radius:999px">캘린더</div>
+          <h3 style="margin:16px 0 8px; font-size:20px; font-weight:800; letter-spacing:-.4px">티켓 오픈 알림</h3>
+          <p style="margin:0 0 22px; font-size:15px; line-height:1.7; color:#6B5B85">D-3, D-10을 한눈에. 오픈 24·10·1시간 전 푸시로 챙겨드립니다.</p>
+          <div style="border-radius:26px 26px 0 0; border:7px solid #221632; border-bottom:0; background:#221632; overflow:hidden; height:290px"><img src="uploads/9.캘린더.png" alt="캘린더 화면" style="width:100%; display:block"></div>
+        </div>
+        <div style="background:linear-gradient(180deg,#F4EEFF,#FFFFFF); border:1px solid #EFE6FF; border-radius:32px; padding:30px 22px 0; text-align:center; overflow:hidden; box-shadow:0 16px 36px rgba(103,60,180,.08); transform:rotate(-1deg); transition:transform .4s ease, box-shadow .4s ease" style-hover="{{ tiltHover }}">
+          <div style="display:inline-block; font-size:12px; font-weight:800; color:#7C3AED; background:#fff; border:1px solid #E7DBFF; padding:6px 14px; border-radius:999px">보관함</div>
+          <h3 style="margin:16px 0 8px; font-size:20px; font-weight:800; letter-spacing:-.4px">보고 싶은 무대 저장</h3>
+          <p style="margin:0 0 22px; font-size:15px; line-height:1.7; color:#6B5B85">하트 한 번으로 담고, 최근 본 공연도 자동으로 모아둡니다.</p>
+          <div style="border-radius:26px 26px 0 0; border:7px solid #221632; border-bottom:0; background:#221632; overflow:hidden; height:290px"><img src="uploads/11.보관함.png" alt="보관함 화면" style="width:100%; display:block"></div>
+        </div>
+        <div style="background:linear-gradient(180deg,#F4EEFF,#FFFFFF); border:1px solid #EFE6FF; border-radius:32px; padding:30px 22px 0; text-align:center; overflow:hidden; box-shadow:0 16px 36px rgba(103,60,180,.08); transform:rotate(1.6deg); transition:transform .4s ease, box-shadow .4s ease" style-hover="{{ tiltHover }}">
+          <div style="display:inline-block; font-size:12px; font-weight:800; color:#7C3AED; background:#fff; border:1px solid #E7DBFF; padding:6px 14px; border-radius:999px">리포트</div>
+          <h3 style="margin:16px 0 8px; font-size:20px; font-weight:800; letter-spacing:-.4px">6개월 관람 기록</h3>
+          <p style="margin:0 0 22px; font-size:15px; line-height:1.7; color:#6B5B85">관람 트렌드, 장르 분포, 최애 아티스트 랭킹까지 정리해 드립니다.</p>
+          <div style="border-radius:26px 26px 0 0; border:7px solid #221632; border-bottom:0; background:#221632; overflow:hidden; height:290px"><img src="uploads/12.리포트.png" alt="리포트 화면" style="width:100%; display:block"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive" style="padding:0 28px 120px">
+    <div style="max-width:1180px; margin:0 auto; background:linear-gradient(140deg,#7C3AED 0%,#6D28D9 55%,#8B5CF6 100%); border-radius:44px; padding:clamp(40px,5vw,72px) clamp(28px,4.5vw,64px); position:relative; overflow:hidden">
+      <div style="position:absolute; right:-70px; top:-70px; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.12)"></div>
+      <div style="position:absolute; left:38%; bottom:-90px; width:220px; height:220px; border-radius:50%; background:rgba(255,190,205,.20)"></div>
+      <div style="position:relative; display:flex; flex-wrap:wrap; gap:56px; align-items:center">
+        <div style="flex:1 1 420px; min-width:0">
+          <div style="font-size:13px; font-weight:800; letter-spacing:2px; color:#E4D5FF">MY ARCHIVE</div>
+          <h2 style="margin:14px 0 0; font-size:clamp(30px,3.4vw,44px); line-height:1.24; letter-spacing:-1.2px; font-weight:800; color:#fff; text-wrap:pretty">모은 공연이 쌓이면<br>그게 곧 내 취향이 됩니다</h2>
+          <p style="margin:22px 0 0; font-size:18px; line-height:1.74; color:#EADDFF; max-width:520px; text-wrap:pretty">저장한 무대, 다녀온 무대, 좋아하는 아티스트가 프로필 한 장에 모입니다. 기록이 늘어날수록 추천은 더 정확해집니다.</p>
+          <sc-if value="{{ reportHighlight }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:30px">
+              <div style="background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:18px; padding:16px 20px; color:#fff"><div style="font-size:22px; font-weight:800">나의 공연 기억</div><div style="font-size:14px; color:#E4D5FF; margin-top:4px">관람한 무대를 카드로 보관</div></div>
+              <div style="background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:18px; padding:16px 20px; color:#fff"><div style="font-size:22px; font-weight:800">취향 태그</div><div style="font-size:14px; color:#E4D5FF; margin-top:4px">장르·분위기·아티스트</div></div>
+              <div style="background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:18px; padding:16px 20px; color:#fff"><div style="font-size:22px; font-weight:800">리포트 공유</div><div style="font-size:14px; color:#E4D5FF; margin-top:4px">친구에게 한 번에</div></div>
+            </div>
+          </sc-if>
+          <div style="display:flex; gap:20px; margin-top:38px; align-items:center; flex-wrap:wrap">
+            <div style="background:#fff; border-radius:26px; padding:16px; box-shadow:0 18px 40px rgba(30,10,60,.26); display:flex; align-items:center; justify-content:center">
+              <img src="uploads/qrcode.png" alt="NOLI 설치 QR 코드 — Let's Start!" style="width:150px; height:150px; display:block; object-fit:contain">
+            </div>
+            <div style="color:#fff; max-width:250px">
+              <div style="font-size:20px; font-weight:800; letter-spacing:-.4px">카메라로 스캔하기</div>
+              <p style="margin:8px 0 0; font-size:15px; line-height:1.7; color:#E4D5FF">QR을 찍으면 NOLI 설치 페이지로 바로 이동합니다.</p>
+            </div>
+          </div>
+        </div>
+        <div style="flex:0 1 auto; display:flex; gap:18px; align-items:flex-end">
+          <div style="width:214px; height:400px; border-radius:36px; border:7px solid #1B1129; background:#1B1129; overflow:hidden; box-shadow:0 30px 60px rgba(20,5,50,.35); flex:none; transform:rotate(-4deg)"><img src="uploads/13.프로필.png" alt="프로필 화면" style="width:100%; display:block"></div>
+          <div style="width:186px; height:330px; border-radius:32px; border:7px solid #1B1129; background:#1B1129; overflow:hidden; box-shadow:0 24px 50px rgba(20,5,50,.30); flex:none; transform:rotate(4deg)"><img src="uploads/10.티켓오픈알람설정.png" alt="알람 설정 화면" style="width:100%; display:block"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid #EFE6FF; padding:44px 28px 60px">
+    <div style="max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap">
+      <div>
+        <div style="font-family:Pretendard,sans-serif; font-weight:800; font-size:24px; color:#7C3AED">NOLI</div>
+        <div style="font-size:14px; color:#8B7BA5; margin-top:4px">일상에 문화를 더하다</div>
+      </div>
+      <div style="display:flex; gap:24px; font-size:14px; color:#8B7BA5">
+        <a href="#intro" style="color:#8B7BA5">소개</a>
+        <a href="#taste" style="color:#8B7BA5">취향분석</a>
+        <a href="#features" style="color:#8B7BA5">기능</a>
+        <a href="#archive" style="color:#8B7BA5">아카이브</a>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ showStickyCta }}" hint-placeholder-val="{{ true }}">
+    <a href="#archive" style="position:fixed; right:26px; bottom:26px; z-index:60; background:linear-gradient(135deg,#8B5CF6,#6D28D9); color:#fff; font-size:15px; font-weight:800; padding:16px 26px; border-radius:999px; box-shadow:0 16px 34px rgba(109,40,217,.38)" style-hover="{{ ctaHover }}">NOLI 시작하기</a>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sparkleCursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;},&quot;showSparkles&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;},&quot;showStickyCta&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;},&quot;reportHighlight&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;연출&quot;}}">
+class Component extends DCLogic {
+  state = { p: 0, page: 0 };
+
+  componentDidMount() {
+    if (this.props.sparkleCursor ?? true) this.mountCursor();
+    const scroller = () => {
+      let n = document.getElementById('scrub');
+      while (n && n !== document.body) {
+        const cs = getComputedStyle(n);
+        if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 4
+            && n.clientHeight <= window.innerHeight * 1.5) return n;
+        n = n.parentElement;
+      }
+      return null;
+    };
+    this.onScroll = () => {
+      const el = document.getElementById('scrub');
+      const sc = scroller();
+      const page = sc
+        ? Math.min(1, Math.max(0, sc.scrollTop / ((sc.scrollHeight - sc.clientHeight) || 1)))
+        : Math.min(1, Math.max(0, window.scrollY / ((document.documentElement.scrollHeight - window.innerHeight) || 1)));
+      let p = this.state.p;
+      const inner = el && el.firstElementChild;
+      if (inner) {
+        const range = el.offsetHeight - inner.offsetHeight;
+        const travelled = inner.getBoundingClientRect().top - el.getBoundingClientRect().top;
+        p = range > 0 ? Math.min(1, Math.max(0, travelled / range)) : 0;
+      }
+      if (Math.abs(p - this.state.p) > 0.003 || Math.abs(page - this.state.page) > 0.003) {
+        this.setState({ p, page });
+      }
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', this.onScroll);
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, { capture: true });
+    if (this.onMove) window.removeEventListener('mousemove', this.onMove);
+    if (this.onDown) window.removeEventListener('mousedown', this.onDown);
+    if (this.cursorLayer) this.cursorLayer.remove();
+    window.removeEventListener('resize', this.onScroll);
+  }
+
+  mountCursor() {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const layer = document.createElement('div');
+    layer.style.cssText = 'position:fixed; inset:0; z-index:9999; pointer-events:none; overflow:hidden';
+    document.body.appendChild(layer);
+    this.cursorLayer = layer;
+
+    const halo = document.createElement('div');
+    halo.style.cssText = 'position:absolute; top:0; left:0; width:34px; height:34px; margin:-17px 0 0 -17px; border-radius:50%; background:radial-gradient(closest-side, rgba(167,139,250,.55), rgba(244,112,138,.22), transparent 72%); filter:blur(1px); will-change:transform';
+    const core = document.createElement('div');
+    core.style.cssText = 'position:absolute; top:0; left:0; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:2px; background:#fff; box-shadow:0 0 12px 3px rgba(124,58,237,.65); transform:rotate(45deg); will-change:transform';
+    layer.append(halo, core);
+
+    const g = window.gsap;
+    const colors = ['#A78BFA', '#7C3AED', '#F4708A', '#FFC2CE', '#FFFFFF'];
+    const star = (x, y) => {
+      const s = document.createElement('div');
+      const size = 6 + Math.random() * 9;
+      const c = colors[(Math.random() * colors.length) | 0];
+      s.style.cssText = 'position:absolute; left:' + x + 'px; top:' + y + 'px; width:' + size + 'px; height:' + size + 'px; margin:' + (-size / 2) + 'px 0 0 ' + (-size / 2) + 'px; background:' + c + '; box-shadow:0 0 10px ' + c + '; clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%); will-change:transform,opacity';
+      layer.appendChild(s);
+      const dx = (Math.random() - 0.5) * 70, dy = 18 + Math.random() * 60;
+      if (g) {
+        g.fromTo(s, { scale: 0, opacity: 1, rotate: 0 },
+          { scale: 1.1, rotate: 160 + Math.random() * 120, x: dx, y: dy, opacity: 0,
+            duration: 0.75 + Math.random() * 0.5, ease: 'power2.out', onComplete: () => s.remove() });
+      } else {
+        s.animate([{ transform: 'scale(0)', opacity: 1 }, { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(1) rotate(180deg)', opacity: 0 }],
+          { duration: 900, easing: 'ease-out' }).onfinish = () => s.remove();
+      }
+    };
+
+    const xTo = g && g.quickTo ? g.quickTo(halo, 'x', { duration: 0.45, ease: 'power3' }) : null;
+    const yTo = g && g.quickTo ? g.quickTo(halo, 'y', { duration: 0.45, ease: 'power3' }) : null;
+    const cxTo = g && g.quickTo ? g.quickTo(core, 'x', { duration: 0.12, ease: 'power3' }) : null;
+    const cyTo = g && g.quickTo ? g.quickTo(core, 'y', { duration: 0.12, ease: 'power3' }) : null;
+
+    let last = 0, lx = 0, ly = 0;
+    this.onMove = (e) => {
+      const x = e.clientX, y = e.clientY;
+      if (xTo) { xTo(x); yTo(y); cxTo(x); cyTo(y); }
+      else { halo.style.transform = core.style.transform = 'translate(' + x + 'px,' + y + 'px)'; }
+      const now = performance.now();
+      const moved = Math.hypot(x - lx, y - ly);
+      if (now - last > 48 && moved > 8) { last = now; lx = x; ly = y; star(x, y); }
+    };
+    this.onDown = (e) => { for (let i = 0; i < 7; i++) star(e.clientX, e.clientY); };
+    window.addEventListener('mousemove', this.onMove, { passive: true });
+    window.addEventListener('mousedown', this.onDown, { passive: true });
+
+    if (g) {
+      g.from('#intro h1', { y: 26, opacity: 0, duration: 0.9, ease: 'power3.out' });
+    }
+  }
+
+  renderVals() {
+    const p = this.state.p;
+    const active = Math.min(2, Math.floor(p * 3.0001));
+
+    const steps = [
+      { title: '장르와 분위기를 골라요', body: '콘서트, 뮤지컬, 밴드, 댄스, 클래식, 전시. 여기에 ‘감성적인’, ‘다정한’ 같은 분위기까지 고르면 설정 끝입니다.' },
+      { title: '좋아하는 아티스트를 등록해요', body: '이름을 검색해 등록하면 그 배우와 가수의 공연 소식이 가장 먼저 도착합니다.' },
+      { title: '취향 카드가 완성돼요', body: 'NOLI가 찾은 취향을 카드로 정리합니다. 이후 모든 추천과 알림의 기준이 됩니다.' }
+    ];
+
+    const screenSrc = [
+      { src: 'uploads/3취향설정_분위기.png', alt: '취향 설정 - 장르와 분위기' },
+      { src: 'uploads/5.취향설정_아티스트검색완료및선택.png', alt: '취향 설정 - 아티스트 선택' },
+      { src: 'uploads/6.취향설정완료.png', alt: '취향 설정 완료' }
+    ];
+
+    const tags = ['콘서트', '뮤지컬', '밴드', '댄스', '클래식', '전시', '감성적인', '다정한', '로맨틱', '슬픈', '아름다운', '가족과 함께', '도시배경', '내 취향 일치 95%', '티켓 오픈 D-3', '보관함에 담기'];
+    const pill = (label, i) => ({
+      label,
+      style: {
+        flex: 'none', padding: '14px 26px', borderRadius: '999px', fontSize: '18px', fontWeight: 800,
+        letterSpacing: '-.3px', whiteSpace: 'nowrap',
+        background: i % 3 === 1 ? '#FFECEF' : i % 3 === 2 ? 'linear-gradient(135deg,#8B5CF6,#6D28D9)' : '#F1EBFF',
+        color: i % 3 === 1 ? '#F4708A' : i % 3 === 2 ? '#fff' : '#7C3AED',
+        border: i % 3 === 2 ? '1px solid transparent' : '1px solid rgba(124,58,237,.12)'
+      }
+    });
+    const rowA = tags.concat(tags).map((t, i) => pill(t, i));
+    const rowB = tags.slice().reverse().concat(tags.slice().reverse()).map((t, i) => pill(t, i + 2));
+
+    return {
+      tickerA: rowA,
+      tickerB: rowB,
+      showSparkles: this.props.showSparkles ?? true,
+      showStickyCta: this.props.showStickyCta ?? true,
+      reportHighlight: this.props.reportHighlight ?? true,
+      navHover: { color: '#7C3AED' },
+      ctaHover: { filter: 'brightness(1.08)' },
+      ghostHover: { transform: 'translateY(-2px)' },
+      tiltHover: { transform: 'rotate(0deg) translateY(-10px) scale(1.02)', boxShadow: '0 30px 60px rgba(103,60,180,.18)' },
+      pageBar: { height: '100%', background: 'linear-gradient(90deg,#A78BFA,#7C3AED)', borderRadius: '0 3px 3px 0', width: (this.state.page * 100) + '%' },
+      scrubBar: { height: '100%', background: 'linear-gradient(90deg,#A78BFA,#7C3AED)', borderRadius: '999px', transition: 'width .2s linear', width: Math.max(4, p * 100) + '%' },
+      steps: steps.map((s, i) => {
+        const on = i === active;
+        return {
+          num: '0' + (i + 1),
+          title: s.title,
+          body: s.body,
+          cardStyle: {
+            borderRadius: '22px', padding: 'clamp(11px,1.9vh,24px) 22px', display: 'flex', gap: '16px',
+            alignItems: 'flex-start', transition: 'all .45s ease',
+            background: on ? '#FFFFFF' : 'rgba(255,255,255,.45)',
+            border: on ? '1px solid #E3D2FF' : '1px solid transparent',
+            boxShadow: on ? '0 16px 34px rgba(103,60,180,.14)' : 'none',
+            opacity: on ? 1 : .5,
+            transform: on ? 'translateX(0)' : 'translateX(-6px)'
+          },
+          numStyle: {
+            width: '38px', height: '38px', borderRadius: '13px', flex: 'none', display: 'flex',
+            alignItems: 'center', justifyContent: 'center', fontFamily: 'Pretendard,sans-serif',
+            fontWeight: 800, fontSize: '17px', transition: 'all .45s ease',
+            background: on ? '#7C3AED' : '#E9DEFF',
+            color: on ? '#fff' : '#9C86C6'
+          }
+        };
+      }),
+      screens: screenSrc.map((s, i) => ({
+        src: s.src,
+        alt: s.alt,
+        style: {
+          position: 'absolute', top: 0, left: 0, width: '100%',
+          transition: 'opacity .5s ease, transform .6s ease',
+          opacity: i === active ? 1 : 0,
+          transform: i === active ? 'scale(1)' : 'scale(1.03)'
+        }
+      }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
